@@ -45,13 +45,14 @@
 }
 
 :root {
-  --background: #ffffff;
+  --background: #3E377A; /* Primary background */
   --foreground: #171717;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: #3E377A;
   /* Use Apercu Pro for Tailwind's font-sans token */
   --font-sans: "Apercu Pro", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   --font-mono: var(--font-geist-mono);

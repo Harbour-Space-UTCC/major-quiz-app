@@ -29,7 +29,7 @@ function MajorQuizApp() {
   const isLast = currentQuestion === questions.length - 1;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-primary flex items-center justify-center p-4">
       <div className="max-w-2xl mx-auto w-full">
         <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
           <ProgressBar current={currentQuestion} total={questions.length} />

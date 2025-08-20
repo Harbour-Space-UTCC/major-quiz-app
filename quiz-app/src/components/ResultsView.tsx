@@ -6,7 +6,7 @@ import { MajorIcon } from "@/components/Icons";
 export function ResultsView({ results, onReset }: { results: QuizResult[]; onReset: () => void }) {
   const topMatch = results[0];
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 p-4">
+    <div className="min-h-screen bg-primary p-4">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
           <div className="text-center mb-8">
@@ -96,4 +96,3 @@ export function ResultsView({ results, onReset }: { results: QuizResult[]; onRes
     </div>
   );
 }
-

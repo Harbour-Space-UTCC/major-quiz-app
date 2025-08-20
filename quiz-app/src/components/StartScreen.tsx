@@ -4,7 +4,7 @@ import { majors } from "@/lib/quiz";
 
 export function StartScreen({ onStart }: { onStart: () => void }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-primary flex items-center justify-center p-4">
       <div className="max-w-2xl mx-auto text-center">
         <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
           <h1 className="text-5xl font-bold text-white mb-4">TechPath Quiz</h1>
@@ -40,4 +40,3 @@ export function StartScreen({ onStart }: { onStart: () => void }) {
     </div>
   );
 }
-
