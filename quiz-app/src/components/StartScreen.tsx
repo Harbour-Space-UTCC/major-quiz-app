@@ -30,8 +30,10 @@ export function StartScreen({ onStart }: { onStart: () => void }) {
           </div>
 
           <button
+            type="button"
             onClick={onStart}
-            className="bg-white-100 text-primary-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-neutral-100 transition-all transform hover:scale-105 cursor-pointer"
+            aria-label="Start the TechPath Quiz"
+            className="bg-white-100 text-primary-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-neutral-100 transition-all transform hover:scale-105 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[rgba(62,55,122,0.6)]"
           >
             Start Your Journey
           </button>

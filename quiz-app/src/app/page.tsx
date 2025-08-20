@@ -1,10 +1,11 @@
 'use client'
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useQuiz } from '@/hooks/useQuiz';
 import { StartScreen } from '@/components/StartScreen';
 import { ResultsView } from '@/components/ResultsView';
 import { ProgressBar } from '@/components/ProgressBar';
+import { QuestionCard } from '@/components/QuestionCard';
 
 function MajorQuizApp() {
   const {
@@ -22,64 +23,98 @@ function MajorQuizApp() {
     show,
   } = useQuiz();
 
+  const selected = answers[currentQuestion];
+  const isLast = currentQuestion === questions.length - 1;
+  const optionsCount = questions[currentQuestion].answers.length;
+
+  useEffect(() => {
+    if (!quizStarted || showResults) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      // Ignore when user is interacting with inputs to preserve native behavior
+      const target = e.target as HTMLElement | null;
+      const tag = target?.tagName;
+      const isEditable = (target as HTMLElement | null)?.isContentEditable;
+      if (
+        target &&
+        (isEditable || tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || tag === 'BUTTON')
+      ) {
+        return;
+      }
+      const key = e.key;
+      if (key === 'ArrowDown' || key === 'ArrowRight') {
+        e.preventDefault();
+        const next = selected === undefined ? 0 : Math.min((selected as number) + 1, optionsCount - 1);
+        handleAnswer(next);
+      } else if (key === 'ArrowUp' || key === 'ArrowLeft') {
+        e.preventDefault();
+        const prev = selected === undefined ? 0 : Math.max((selected as number) - 1, 0);
+        handleAnswer(prev);
+      } else if (key === 'Enter') {
+        if (selected === undefined) return;
+        e.preventDefault();
+        if (isLast) {
+          show();
+        } else {
+          nextQuestion();
+        }
+      } else if (key === 'Escape') {
+        e.preventDefault();
+        if (currentQuestion > 0) prevQuestion();
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [quizStarted, showResults, selected, optionsCount, isLast, currentQuestion, handleAnswer, nextQuestion, prevQuestion, show]);
+
   if (!quizStarted) return <StartScreen onStart={startQuiz} />;
   if (showResults && results) return <ResultsView results={results} onReset={resetQuiz} />;
 
-  const selected = answers[currentQuestion];
-  const isLast = currentQuestion === questions.length - 1;
-
   return (
-    <div className="min-h-screen bg-primary flex items-center justify-center p-4">
+    <div className="min-h-screen bg-primary flex items-center justify-center p-4" role="application" aria-label="TechPath Quiz">
       <div className="max-w-2xl mx-auto w-full">
         <div className="bg-white-16 backdrop-blur-lg rounded-3xl p-8 border border-white-40">
           <ProgressBar current={currentQuestion} total={questions.length} />
 
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold text-white mb-6">
-              {questions[currentQuestion].question}
-            </h2>
-            <div className="space-y-3">
-              {questions[currentQuestion].answers.map((answer, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => handleAnswer(idx)}
-                  className={`w-full p-4 rounded-xl text-left transition-all hover:scale-[1.02] cursor-pointer ${
-                    selected === idx
-                      ? 'bg-white-100 text-neutral-900 shadow-lg'
-                      : 'bg-white-16 text-white hover:bg-white-40'
-                  } border border-white-40`}
-                >
-                  {answer.text}
-                </button>
-              ))}
-            </div>
+          <div className="mb-8" aria-live="polite">
+            <QuestionCard
+              question={questions[currentQuestion]}
+              selectedIndex={selected}
+              onSelect={handleAnswer}
+              onSubmit={() => {
+                if (selected === undefined) return;
+                if (isLast) return show();
+                nextQuestion();
+              }}
+            />
           </div>
 
           <div className="flex justify-between">
             <button
-              onClick={prevQuestion}
-              disabled={currentQuestion === 0}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${
-                currentQuestion === 0
-                  ? 'bg-white-16 text-white-40 cursor-not-allowed'
-                  : 'bg-white-16 text-white hover:bg-white-40 cursor-pointer'
-              }`}
+              type="button"
+              onClick={() => {
+                if (currentQuestion === 0) return resetQuiz();
+                prevQuestion();
+              }}
+              aria-label={currentQuestion === 0 ? 'Back to start' : 'Previous question'}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[rgba(62,55,122,0.6)] bg-white-16 text-white hover:bg-white-40 cursor-pointer`}
             >
               <ChevronLeft className="w-4 h-4" />
               Previous
             </button>
             
             <button
+              type="button"
               onClick={() => {
                 if (selected === undefined) return;
                 if (isLast) return show();
                 nextQuestion();
               }}
               disabled={selected === undefined}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${
+              aria-disabled={selected === undefined}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[rgba(62,55,122,0.6)] ${
                 selected === undefined
                   ? 'bg-white-16 text-white-40 cursor-not-allowed'
-                  : 'bg-white-100 text-neutral-900 hover:bg-neutral-100 cursor-pointer'
+                  : 'bg-white-100 text-primary-600 hover:bg-neutral-100 cursor-pointer'
               }`}
             >
               {isLast ? 'Get Results' : 'Next'}
