@@ -1,7 +1,15 @@
 import type { NextConfig } from "next";
+import path from "path";
 
-const nextConfig: NextConfig = {
-  /* config options here */
-};
+// Explicitly set roots to avoid multiple-lockfile workspace warnings
+const config = {
+  reactStrictMode: true,
+  // Used by Node.js tracing during build/production
+  outputFileTracingRoot: path.join(__dirname),
+  // Used by Turbopack in dev
+  turbopack: {
+    root: __dirname,
+  },
+} as unknown as NextConfig;
 
-export default nextConfig;
+export default config;
