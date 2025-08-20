@@ -43,7 +43,7 @@ function MajorQuizApp() {
                 <button
                   key={idx}
                   onClick={() => handleAnswer(idx)}
-                  className={`w-full p-4 rounded-xl text-left transition-all hover:scale-[1.02] ${
+                  className={`w-full p-4 rounded-xl text-left transition-all hover:scale-[1.02] cursor-pointer ${
                     selected === idx
                       ? 'bg-white-100 text-neutral-900 shadow-lg'
                       : 'bg-white-16 text-white hover:bg-white-40'
@@ -62,7 +62,7 @@ function MajorQuizApp() {
               className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${
                 currentQuestion === 0
                   ? 'bg-white-16 text-white-40 cursor-not-allowed'
-                  : 'bg-white-16 text-white hover:bg-white-40'
+                  : 'bg-white-16 text-white hover:bg-white-40 cursor-pointer'
               }`}
             >
               <ChevronLeft className="w-4 h-4" />
@@ -79,7 +79,7 @@ function MajorQuizApp() {
               className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${
                 selected === undefined
                   ? 'bg-white-16 text-white-40 cursor-not-allowed'
-                  : 'bg-white-100 text-neutral-900 hover:bg-neutral-100'
+                  : 'bg-white-100 text-neutral-900 hover:bg-neutral-100 cursor-pointer'
               }`}
             >
               {isLast ? 'Get Results' : 'Next'}

@@ -11,7 +11,7 @@ export function ResultsView({ results, onReset }: { results: QuizResult[]; onRes
         <div className="bg-white-16 backdrop-blur-lg rounded-3xl p-8 border border-white-40">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-white mb-4">Your Perfect Match!</h1>
-            <p className="text-white-40">Based on your answers, here are your top tech major recommendations:</p>
+            <p className="text-white">Based on your answers, here are your top tech major recommendations:</p>
           </div>
 
           <div className={`bg-[image:var(--gradient-purple-50)] rounded-2xl p-8 mb-8 text-neutral-900`}>
@@ -85,7 +85,7 @@ export function ResultsView({ results, onReset }: { results: QuizResult[]; onRes
           <div className="flex justify-center gap-4">
             <button
               onClick={onReset}
-              className="flex items-center gap-2 bg-white-16 hover:bg-white-40 text-white px-6 py-3 rounded-xl font-medium transition-all"
+              className="flex items-center gap-2 bg-white-16 hover:bg-white-40 text-white px-6 py-3 rounded-xl font-medium transition-all cursor-pointer"
             >
               <RotateCcw className="w-4 h-4" />
               Retake Quiz

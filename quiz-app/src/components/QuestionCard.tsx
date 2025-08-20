@@ -19,7 +19,7 @@ export function QuestionCard({
           <button
             key={idx}
             onClick={() => onSelect(idx)}
-            className={`w-full p-4 rounded-xl text-left transition-all hover:scale-[1.02] ${
+            className={`w-full p-4 rounded-xl text-left transition-all hover:scale-[1.02] cursor-pointer ${
               selectedIndex === idx
                 ? "bg-white-100 text-neutral-900 shadow-lg"
                 : "bg-white-16 text-white hover:bg-white-40"
