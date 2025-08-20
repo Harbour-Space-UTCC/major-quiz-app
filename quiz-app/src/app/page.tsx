@@ -31,7 +31,7 @@ function MajorQuizApp() {
   return (
     <div className="min-h-screen bg-primary flex items-center justify-center p-4">
       <div className="max-w-2xl mx-auto w-full">
-        <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
+        <div className="bg-white-16 backdrop-blur-lg rounded-3xl p-8 border border-white-40">
           <ProgressBar current={currentQuestion} total={questions.length} />
 
           <div className="mb-8">
@@ -45,9 +45,9 @@ function MajorQuizApp() {
                   onClick={() => handleAnswer(idx)}
                   className={`w-full p-4 rounded-xl text-left transition-all hover:scale-[1.02] ${
                     selected === idx
-                      ? 'bg-white text-purple-900 shadow-lg'
-                      : 'bg-white/10 text-white hover:bg-white/20'
-                  } border border-white/20`}
+                      ? 'bg-white-100 text-neutral-900 shadow-lg'
+                      : 'bg-white-16 text-white hover:bg-white-40'
+                  } border border-white-40`}
                 >
                   {answer.text}
                 </button>
@@ -61,8 +61,8 @@ function MajorQuizApp() {
               disabled={currentQuestion === 0}
               className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${
                 currentQuestion === 0
-                  ? 'bg-white/10 text-white/40 cursor-not-allowed'
-                  : 'bg-white/20 text-white hover:bg-white/30'
+                  ? 'bg-white-16 text-white-40 cursor-not-allowed'
+                  : 'bg-white-16 text-white hover:bg-white-40'
               }`}
             >
               <ChevronLeft className="w-4 h-4" />
@@ -78,8 +78,8 @@ function MajorQuizApp() {
               disabled={selected === undefined}
               className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${
                 selected === undefined
-                  ? 'bg-white/10 text-white/40 cursor-not-allowed'
-                  : 'bg-white text-purple-900 hover:bg-white/90'
+                  ? 'bg-white-16 text-white-40 cursor-not-allowed'
+                  : 'bg-white-100 text-neutral-900 hover:bg-neutral-100'
               }`}
             >
               {isLast ? 'Get Results' : 'Next'}

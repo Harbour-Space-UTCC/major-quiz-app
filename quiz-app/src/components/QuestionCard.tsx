@@ -21,9 +21,9 @@ export function QuestionCard({
             onClick={() => onSelect(idx)}
             className={`w-full p-4 rounded-xl text-left transition-all hover:scale-[1.02] ${
               selectedIndex === idx
-                ? "bg-white text-purple-900 shadow-lg"
-                : "bg-white/10 text-white hover:bg-white/20"
-            } border border-white/20`}
+                ? "bg-white-100 text-neutral-900 shadow-lg"
+                : "bg-white-16 text-white hover:bg-white-40"
+            } border border-white-40`}
           >
             {answer.text}
           </button>
@@ -32,4 +32,3 @@ export function QuestionCard({
     </div>
   );
 }
-
