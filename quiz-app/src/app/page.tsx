@@ -70,9 +70,9 @@ function MajorQuizApp() {
   if (showResults && results) return <ResultsView results={results} onReset={resetQuiz} />;
 
   return (
-    <div className="min-h-screen bg-primary flex items-center justify-center p-4" role="application" aria-label="TechPath Quiz">
+    <div className="min-h-screen bg-primary flex items-center justify-center p-4 pb-safe" role="application" aria-label="TechPath Quiz">
       <div className="max-w-2xl mx-auto w-full">
-        <div className="bg-white-16 backdrop-blur-lg rounded-3xl p-8 border border-white-40">
+        <div className="bg-white-16 backdrop-blur-lg rounded-3xl p-6 md:p-8 border border-white-40">
           <ProgressBar current={currentQuestion} total={questions.length} />
 
           <div className="mb-8" aria-live="polite">
@@ -88,7 +88,7 @@ function MajorQuizApp() {
             />
           </div>
 
-          <div className="flex justify-between">
+          <div className="flex flex-col-reverse sm:flex-row gap-3 sm:gap-0 sm:justify-between">
             <button
               type="button"
               onClick={() => {
@@ -96,7 +96,7 @@ function MajorQuizApp() {
                 prevQuestion();
               }}
               aria-label={currentQuestion === 0 ? 'Back to start' : 'Previous question'}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[rgba(62,55,122,0.6)] bg-white-16 text-white hover:bg-white-40 cursor-pointer`}
+              className={`flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[rgba(62,55,122,0.6)] bg-white-16 text-white hover:bg-white-40 cursor-pointer w-full sm:w-auto`}
             >
               <ChevronLeft className="w-4 h-4" />
               Previous
@@ -111,7 +111,7 @@ function MajorQuizApp() {
               }}
               disabled={selected === undefined}
               aria-disabled={selected === undefined}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[rgba(62,55,122,0.6)] ${
+              className={`flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[rgba(62,55,122,0.6)] w-full sm:w-auto ${
                 selected === undefined
                   ? 'bg-white-16 text-white-40 cursor-not-allowed'
                   : 'bg-white-100 text-primary-600 hover:bg-neutral-100 cursor-pointer'

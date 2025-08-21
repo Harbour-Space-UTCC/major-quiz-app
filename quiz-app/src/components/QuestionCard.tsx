@@ -29,10 +29,10 @@ export function QuestionCard({
         }
       }}
     >
-      <legend className="text-2xl font-bold text-white mb-3">
+      <legend className="text-xl sm:text-2xl font-bold text-white mb-3">
         {question.question}
       </legend>
-      <p id={hintId} className="text-white-40 text-sm mb-3">
+      <p id={hintId} className="text-white-40 text-xs sm:text-sm mb-3">
         Use arrow keys or click to select an answer.
       </p>
 
@@ -44,7 +44,7 @@ export function QuestionCard({
             <label
               key={idx}
               htmlFor={optionId}
-              className={`group relative flex items-start gap-3 w-full p-4 rounded-xl transition-all hover:scale-[1.01] cursor-pointer border ${
+              className={`group relative flex items-start gap-3 w-full p-3 sm:p-4 rounded-xl transition-all hover:scale-[1.01] cursor-pointer border ${
                 checked
                   ? "bg-white-100 text-primary-600 shadow-lg border-white-100"
                   : "bg-white-16 text-white hover:bg-white-40 border-white-40"
@@ -69,7 +69,7 @@ export function QuestionCard({
               >
                 {letters[idx] ?? String(idx + 1)}
               </span>
-              <span className="flex-1 leading-relaxed">{answer.text}</span>
+              <span className="flex-1 leading-relaxed text-sm sm:text-base">{answer.text}</span>
               <span
                 aria-hidden
                 className={`ml-3 mt-0.5 h-5 w-5 rounded-full border flex items-center justify-center transition-all ${
