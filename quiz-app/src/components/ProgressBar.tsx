@@ -11,7 +11,7 @@ export function ProgressBar({ current, total }: { current: number; total: number
         <span>{progress}% Complete</span>
       </div>
       <div
-        className="w-full bg-white-16 rounded-full h-2"
+        className="w-full bg-white-16 rounded-full h-2 overflow-hidden"
         role="progressbar"
         aria-valuenow={progress}
         aria-valuemin={0}
@@ -19,7 +19,7 @@ export function ProgressBar({ current, total }: { current: number; total: number
         aria-label="Quiz progress"
       >
         <div
-          className="bg-primary-400 h-2 rounded-full transition-all duration-300"
+          className="h-2 rounded-full transition-[width] duration-500 ease-out bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 animate-[shimmer_1.6s_linear_infinite] [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)]"
           style={{ width: `${progress}%` }}
         />
       </div>
@@ -27,3 +27,5 @@ export function ProgressBar({ current, total }: { current: number; total: number
     </div>
   );
 }
+
+/* Tailwind v4 CSS: define shimmer keyframes in global scope */

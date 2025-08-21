@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useQuiz } from '@/hooks/useQuiz';
+import { playSuccess, playTick } from '@/lib/sfx';
 import { StartScreen } from '@/components/StartScreen';
 import { ResultsView } from '@/components/ResultsView';
 import { ProgressBar } from '@/components/ProgressBar';
@@ -66,11 +67,11 @@ function MajorQuizApp() {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [quizStarted, showResults, selected, optionsCount, isLast, currentQuestion, handleAnswer, nextQuestion, prevQuestion, show]);
 
-  if (!quizStarted) return <StartScreen onStart={startQuiz} />;
-  if (showResults && results) return <ResultsView results={results} onReset={resetQuiz} />;
+  if (!quizStarted) return <StartScreen onStart={() => { startQuiz(); playTick(); }} />;
+  if (showResults && results) return <ResultsView results={results} onReset={() => { resetQuiz(); playTick(); }} />;
 
   return (
-    <div className="min-h-screen bg-primary flex items-center justify-center p-4 pb-safe" role="application" aria-label="TechPath Quiz">
+    <div className="min-h-screen bg-aurora flex items-center justify-center p-4 pb-safe" role="application" aria-label="TechPath Quiz">
       <div className="max-w-2xl mx-auto w-full">
         <div className="bg-white-16 backdrop-blur-lg rounded-3xl p-6 md:p-8 border border-white-40">
           <ProgressBar current={currentQuestion} total={questions.length} />
@@ -94,6 +95,7 @@ function MajorQuizApp() {
               onClick={() => {
                 if (currentQuestion === 0) return resetQuiz();
                 prevQuestion();
+                playTick();
               }}
               aria-label={currentQuestion === 0 ? 'Back to start' : 'Previous question'}
               className={`flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[rgba(62,55,122,0.6)] bg-white-16 text-white hover:bg-white-40 cursor-pointer w-full sm:w-auto`}
@@ -106,8 +108,9 @@ function MajorQuizApp() {
               type="button"
               onClick={() => {
                 if (selected === undefined) return;
-                if (isLast) return show();
+                if (isLast) { playSuccess(); return show(); }
                 nextQuestion();
+                playTick();
               }}
               disabled={selected === undefined}
               aria-disabled={selected === undefined}

@@ -1,14 +1,22 @@
 "use client";
 import { RotateCcw } from "lucide-react";
 import type { QuizResult } from "@/lib/quiz";
-import { MajorIcon } from "@/components/Icons";
+import { MajorBadge } from "@/components/MajorBadge";
+import { ConfettiBurst } from "@/components/ConfettiBurst";
+import { ShareResults } from "@/components/ShareResults";
+import { playSuccess } from "@/lib/sfx";
+import { useEffect } from "react";
 
 export function ResultsView({ results, onReset }: { results: QuizResult[]; onReset: () => void }) {
   const topMatch = results[0];
+  useEffect(() => {
+    playSuccess();
+  }, []);
   return (
-    <div className="min-h-screen bg-primary p-4 pb-safe" role="region" aria-label="Quiz results">
+    <div className="relative min-h-screen bg-aurora p-4 pb-safe" role="region" aria-label="Quiz results">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white-16 backdrop-blur-lg rounded-3xl p-6 md:p-8 border border-white-40">
+          <ConfettiBurst />
           <div className="text-center mb-8" aria-live="polite">
             <h1 className="text-2xl md:text-4xl font-bold text-white mb-2">Your Perfect Match!</h1>
             <p className="text-white-40 text-sm md:text-base">Based on your answers, here are your top tech major recommendations:</p>
@@ -17,7 +25,7 @@ export function ResultsView({ results, onReset }: { results: QuizResult[]; onRes
           <div className={`bg-[image:var(--gradient-purple-50)] rounded-2xl p-5 md:p-8 mb-8 text-primary-600`}>
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-4">
-                <MajorIcon name={topMatch.icon} />
+                <MajorBadge major={topMatch.major} className="w-14 h-14" />
                 <div>
                   <h2 className="text-xl md:text-2xl font-bold">{topMatch.name}</h2>
                   <p className="text-neutral-700 text-sm md:text-base">Your #1 Match</p>
@@ -83,7 +91,7 @@ export function ResultsView({ results, onReset }: { results: QuizResult[]; onRes
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
                     <div className={`bg-[image:var(--gradient-purple-50)] p-2 rounded-lg text-primary-600`}>
-                      <MajorIcon name={result.icon} />
+                      <MajorBadge major={result.major} className="w-10 h-10" />
                     </div>
                     <div>
                       <h3 className="text-white font-bold text-sm md:text-base">{result.name}</h3>
@@ -115,6 +123,7 @@ export function ResultsView({ results, onReset }: { results: QuizResult[]; onRes
               Retake Quiz
             </button>
           </div>
+          <ShareResults results={results} />
         </div>
       </div>
     </div>

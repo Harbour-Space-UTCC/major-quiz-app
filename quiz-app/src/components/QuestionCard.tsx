@@ -1,5 +1,6 @@
 "use client";
 import React, { useId } from "react";
+import { playTick } from "@/lib/sfx";
 import type { Question } from "@/lib/quiz";
 
 export function QuestionCard({
@@ -56,7 +57,7 @@ export function QuestionCard({
                 type="radio"
                 className="sr-only peer"
                 checked={checked}
-                onChange={() => onSelect(idx)}
+                onChange={() => { onSelect(idx); playTick(); }}
                 aria-checked={checked}
               />
               <span

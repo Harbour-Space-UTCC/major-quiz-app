@@ -1,10 +1,10 @@
 "use client";
-import { MajorIcon } from "@/components/Icons";
+import { MajorBadge } from "@/components/MajorBadge";
 import { majors } from "@/lib/quiz";
 
 export function StartScreen({ onStart }: { onStart: () => void }) {
   return (
-    <div className="min-h-screen bg-primary flex items-center justify-center p-4 pb-safe">
+    <div className="min-h-screen bg-aurora flex items-center justify-center p-4 pb-safe">
       <div className="max-w-2xl mx-auto text-center">
         <div className="bg-white-16 backdrop-blur-lg rounded-3xl p-6 md:p-8 border border-white-40">
           <h1 className="text-3xl md:text-5xl font-bold text-white mb-3 md:mb-4">TechPath Quiz</h1>
@@ -16,7 +16,7 @@ export function StartScreen({ onStart }: { onStart: () => void }) {
             {Object.entries(majors).map(([key, major]) => (
               <div key={key} className={`bg-[image:var(--gradient-purple-50)] p-4 rounded-xl text-primary-600 text-center`}>
                 <div className="flex justify-center mb-2">
-                  <MajorIcon name={major.icon} />
+                  <MajorBadge major={key as keyof typeof majors} className="w-12 h-12" />
                 </div>
                 <p className="text-sm font-medium">{major.name}</p>
               </div>
@@ -33,7 +33,7 @@ export function StartScreen({ onStart }: { onStart: () => void }) {
             type="button"
             onClick={onStart}
             aria-label="Start the TechPath Quiz"
-            className="bg-white-100 text-primary-600 px-6 md:px-8 py-4 rounded-xl font-bold text-base md:text-lg hover:bg-neutral-100 transition-all transform hover:scale-[1.02] md:hover:scale-105 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[rgba(62,55,122,0.6)] w-full md:w-auto"
+            className="bg-white-100 text-primary-600 px-6 md:px-8 py-4 rounded-xl font-bold text-base md:text-lg hover:bg-neutral-100 transition-all transform hover:scale-[1.02] md:hover:scale-105 active:translate-y-[1px] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[rgba(62,55,122,0.6)] w-full md:w-auto"
           >
             Start Your Journey
           </button>
