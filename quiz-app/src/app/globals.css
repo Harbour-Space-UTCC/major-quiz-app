@@ -1,52 +1,10 @@
 @import "tailwindcss";
 
-/* Apercu Pro font faces (self-hosted) */
-@font-face {
-  font-family: "Apercu Pro";
-  src: url("/fonts/apercu_regular_pro.otf") format("opentype");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Apercu Pro";
-  src: url("/fonts/apercu_regular_italic_pro.otf") format("opentype");
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Apercu Pro";
-  src: url("/fonts/apercu_medium_pro.otf") format("opentype");
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Apercu Pro";
-  src: url("/fonts/apercu_medium_italic_pro.otf") format("opentype");
-  font-style: italic;
-  font-weight: 500;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Apercu Pro";
-  src: url("/fonts/apercu_bold_pro.otf") format("opentype");
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Apercu Pro";
-  src: url("/fonts/apercu_bold_italic_pro.otf") format("opentype");
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-}
-
 :root {
   --background: #3E377A; /* Primary background */
   --foreground: #171717;
+  /* Fallback until next/font sets --font-sans on <html> */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
 }
 
 @theme inline {
@@ -94,8 +52,7 @@
   --color-white-40: rgba(255, 255, 255, 0.40);
 
   /* Fonts */
-  --font-sans: "Apercu Pro", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 }
 
 @media (prefers-color-scheme: dark) {
